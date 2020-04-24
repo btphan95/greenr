@@ -1,2 +1,2 @@
-# greenr
- dandelion or grass?
+# greenr 🍃
+A web app to tell whether your image is a dandelion or grass.
