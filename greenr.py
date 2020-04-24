@@ -10,7 +10,10 @@ import uvicorn
 import aiohttp
 import asyncio
 
+import os
 import sys
+import base64 
+from PIL import Image
 
 async def get_bytes(url):
     async with aiohttp.ClientSession() as session:
@@ -18,15 +21,8 @@ async def get_bytes(url):
             return await response.read()
 
 app = Starlette()
-
-path = Path('data/greenr')
-
-img = open_image(path/'grass'/'00000025.jpg')
+path = Path('')
 learner = load_learner(path)
-
-pred_class,pred_idx,outputs = learner.predict(img)
-print(pred_class)
-
 
 @app.route("/upload", methods = ["POST"])
 async def upload(request):
@@ -40,8 +36,14 @@ async def classify_url(request):
     return predict_image_from_bytes(bytes)
 
 def predict_image_from_bytes(bytes):
-    img_file = open("img.jpg", "wb")
+    #load byte data into a stream
     img_file = io.BytesIO(bytes)
+    #encoding the image in base64 to serve in HTML
+    img_pil = Image.open(img_file)
+    img_pil.save("img.jpg", format="JPEG")
+    img_uri = base64.b64encode(open("img.jpg", 'rb').read()).decode('utf-8')
+    
+    #make inference on image and return an HTML response
     img = open_image(img_file)
     pred_class, pred_idx, outputs = learner.predict(img)
     formatted_outputs = ["{:.1f}%".format(value) for value in [x * 100 for x in torch.nn.functional.softmax(outputs, dim = 0)]]
@@ -54,13 +56,13 @@ def predict_image_from_bytes(bytes):
         <html>
             <body>
                 <p> Prediction: <b> %s </b> </p>
-                <Confidence: %s </p>
+                <p> Confidence: <b> %s </b> </p>
             </body>
         <figure class = "figure">
-            <img src = %s class = "figure-img">
+            <img src="data:image/png;base64, %s" class = "figure-img">
         </figure>
         </html>
-        """ %(pred_class, pred_probs, "img.jpg"))
+        """ %(pred_class, pred_probs, img_uri))
         
 @app.route("/")
 def form(request):
@@ -87,5 +89,6 @@ def redirect_to_homepage(request):
         return RedirectResponse("/")
         
 if __name__ == "__main__":
-        if "serve" in sys.argv:
-            uvicorn.run(app, host = "0.0.0.0", port = 8008)
+    if "serve" in sys.argv:
+        port = int(os.environ.get("PORT", 8008)) 
+        uvicorn.run(app, host = "0.0.0.0", port = port)
