@@ -5,15 +5,15 @@ RUN apt install -y python3-dev gcc
 
 ADD requirements.txt requirements.txt
 ADD export.pkl export.pkl
-ADD greenr.py greenr.py
+ADD app.py app.py
 
 # Install required libraries
 RUN pip install -r requirements.txt
 
 # Run it once to trigger resnet download
-RUN python greenr.py
+RUN python app.py
 
 EXPOSE 8008
 
 # Start the server
-CMD ["python", "greenr.py", "serve"]
+CMD ["python", "app.py", "serve"]
