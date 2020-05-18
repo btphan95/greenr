@@ -13,5 +13,9 @@ Click the badge above to run the demo.
 
 greenr is powered by a deep learning model created in FastAI. If you are interested in learning how I  created an image dataset from Google Images and trained a dandelions and grass classifier in FastAI, check out this [Github repo](https://github.com/btphan95/greenr-train/) that links to a notebook outlining my process. [FastAI](http://34.68.160.231) is a deep learning library built on top of PyTorch that makes it extremely to get started with deep learning.
 
-To deploy greenr onto the web, I utilized [Flask](https://flask.palletsprojects.com/en/1.1.x/) as the back-end to serve the model as an endpoint, [Flask-CORS](https://flask-cors.readthedocs.io/) to enable Cross Origin Resource Sharing (CORS), [Docker](https://www.docker.com/) to containerize the server, and [Heroku](https://www.heroku.com/) [(https://greenr.herokuapp.com/)](https://greenr.herokuapp.com/) and [Google Cloud Platform](http://cloud.google.com/) [(http://34.68.160.231)](http://34.68.160.231) (for redundancy) to host the container and serve the app.
+To deploy greenr onto the web, I utilized 
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/) as the back-end to serve the model as an endpoint, 
+* [Flask-CORS](https://flask-cors.readthedocs.io/) to enable Cross Origin Resource Sharing (CORS), 
+* [Docker](https://www.docker.com/) to containerize the server, and 
+* [Heroku](https://www.heroku.com/) [(https://greenr.herokuapp.com/)](https://greenr.herokuapp.com/) and [Google Cloud Platform](http://cloud.google.com/) [(http://34.68.160.231)](http://34.68.160.231) (for redundancy) to host the container and serve the app.
 
