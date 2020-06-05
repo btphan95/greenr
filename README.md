@@ -2,7 +2,7 @@
   <a href="url"><img src="https://github.com/btphan95/greenr/blob/master/logo.png?raw=true" align="middle" height="300" width="300" ></a>
 </p>
 
-# greenr 🍃
+# greenr 
 
 A web app to let users upload an image to classify it as a dandelion or grass.
 
