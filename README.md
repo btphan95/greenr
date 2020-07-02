@@ -1,5 +1,6 @@
 <p align="center">
-  ![alt text](https://github.com/btphan95/greenr/blob/master/logo.png?raw=true)
+  [<img src="https://github.com/btphan95/greenr/blob/master/logo.png?raw=true">](http://34.68.160.231)
+  <a href="http://34.68.160.231"><img src="https://github.com/btphan95/greenr/blob/master/logo.png?raw=true" align="middle" height="300" width="300" ></a>
 </p>
 
 # greenr 
